@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Tienda Tecnológica{% endblock %}</title>
+    <style>
+        /* ---------- ESTILOS GLOBALES ---------- */
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            background-color: #f7f8fa;
+        }
+        header {
+            background-color: #0078D7;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        nav {
+            background-color: #005a9e;
+            text-align: center;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            padding: 20px;
+            width: 90%;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        footer {
+            background-color: #0078D7;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>💻 Tienda de Tecnología</h1>
+</header>
+
+<nav>
+    <a href="/store/">Inicio</a>
+    <a href="#">Categorías</a>
+    <a href="#">Marcas</a>
+    <a href="#">Ofertas</a>
+    <a href="#">Contacto</a>
+</nav>
+
+<main>
+    {% block content %}
+    <!-- Aquí se inyecta el contenido de cada página -->
+    {% endblock %}
+</main>
+
+<footer>
+    <p>© 2025 Tienda Tech | Desarrollado con Django <p>By JeOsJuAr </p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Catálogo de Productos{% endblock %}
+
+{% block content %}
+<h2 style="text-align:center;">Catálogo de Productos</h2>
+<table style="width:100%; border-collapse:collapse;">
+    <thead>
+    <tr style="background-color:#0078D7; color:white;">
+        <th style="padding:8px;">Producto</th>
+        <th>Marca</th>
+        <th>Categoría</th>
+        <th>Precio (Q)</th>
+        <th>Stock</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for p in products %}
+        <tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:6px;">{{ p.name }}</td>
+            <td>{{ p.brand.name }}</td>
+            <td>{{ p.category.name }}</td>
+            <td>Q{{ p.price }}</td>
+            <td>{{ p.stock }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="5" style="text-align:center;">No hay productos disponibles.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
