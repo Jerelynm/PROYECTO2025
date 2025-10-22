@@ -1,0 +1,12 @@
+{% extends 'store/base.html' %}
+{% block title %}Categorías{% endblock %}
+{% block content %}
+<h2 style="text-align:center;">Categorías disponibles</h2>
+<ul style="list-style:none; text-align:center;">
+    {% for c in categories %}
+    <li><a href="/store/category/{{ c.slug }}/">{{ c.name }}</a></li>
+    {% empty %}
+    <li>No hay categorías disponibles.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

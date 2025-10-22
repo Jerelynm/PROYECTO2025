@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Product
+from django.shortcuts import get_object_or_404
+from .models import Category, Brand, Product
 
 def catalog_view(request):
     """
@@ -9,3 +10,36 @@ def catalog_view(request):
     """
     products = Product.objects.filter(is_active=True)
     return render(request, 'store/catalog.html', {'products': products})
+
+
+def category_view(request, slug):
+    """
+    Muestra los productos filtrados por categoría.
+    """
+    category = get_object_or_404(Category, slug=slug)
+    products = Product.objects.filter(category=category, is_active=True)
+    return render(request, 'store/catalog.html', {
+        'products': products,
+        'selected_category': category.name
+    })
+
+
+def brand_view(request, slug):
+    """
+    Muestra los productos filtrados por marca.
+    """
+    brand = get_object_or_404(Brand, slug=slug)
+    products = Product.objects.filter(brand=brand, is_active=True)
+    return render(request, 'store/catalog.html', {
+        'products': products,
+        'selected_brand': brand.name
+    })
+
+def categories_list(request):
+    categories = Category.objects.all().order_by('name')
+    return render(request, 'store/categories.html', {'categories': categories})
+
+
+def brands_list(request):
+    brands = Brand.objects.all().order_by('name')
+    return render(request, 'store/brands.html', {'brands': brands})

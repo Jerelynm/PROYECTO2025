@@ -4,6 +4,15 @@
 
 {% block content %}
 <h2 style="text-align:center;">Catálogo de Productos</h2>
+
+<!-- Para mostrar filtros -->
+{% if selected_category %}
+<p style="text-align:center;"><strong>Categoría:</strong> {{ selected_category }}</p>
+{% elif selected_brand %}
+<p style="text-align:center;"><strong>Marca:</strong> {{ selected_brand }}</p>
+{% endif %}
+
+
 <table style="width:100%; border-collapse:collapse;">
     <thead>
     <tr style="background-color:#0078D7; color:white;">
