@@ -43,3 +43,12 @@ def categories_list(request):
 def brands_list(request):
     brands = Brand.objects.all().order_by('name')
     return render(request, 'store/brands.html', {'brands': brands})
+
+def product_detail(request, slug):
+    """
+    Muestra la información detallada de un producto individual.
+    """
+    product = get_object_or_404(Product, slug=slug, is_active=True)
+    return render(request, 'store/product_detail.html', {'product': product})
+
+

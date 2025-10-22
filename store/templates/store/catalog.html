@@ -5,6 +5,11 @@
 {% block content %}
 <h2 style="text-align:center;">Catálogo de Productos</h2>
 
+<!-- Para mostrar un boton de buscar/ aca se utiliza js -->
+<input type="text" id="searchInput" placeholder="Buscar producto..."
+       style="width:50%;margin:10px auto;display:block;padding:8px;border:1px solid #ccc;border-radius:5px;">
+
+
 <!-- Para mostrar filtros -->
 {% if selected_category %}
 <p style="text-align:center;"><strong>Categoría:</strong> {{ selected_category }}</p>
@@ -26,7 +31,9 @@
     <tbody>
     {% for p in products %}
         <tr style="border-bottom:1px solid #ddd;">
-            <td style="padding:6px;">{{ p.name }}</td>
+            <td style="padding:6px;">
+    <a href="/store/product/{{ p.slug }}/" style="color:#0078D7; text-decoration:none;">{{ p.name }}</a>
+</td>
             <td>{{ p.brand.name }}</td>
             <td>{{ p.category.name }}</td>
             <td>Q{{ p.price }}</td>
@@ -37,4 +44,19 @@
     {% endfor %}
     </tbody>
 </table>
+<!-- porción de cod js -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("searchInput");
+    const rows = document.querySelectorAll("tbody tr");
+
+    input.addEventListener("keyup", function() {
+        const query = input.value.toLowerCase();
+        rows.forEach(row => {
+            const text = row.innerText.toLowerCase();
+            row.style.display = text.includes(query) ? "" : "none";
+        });
+    });
+});
+</script>
 {% endblock %}
