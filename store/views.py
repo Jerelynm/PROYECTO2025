@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from .models import Category, Brand, Product
 
+def contacto(request):
+    return render(request, 'store/contacto.html')
+
 def catalog_view(request):
     """
     Vista principal del catálogo.
