@@ -5,6 +5,9 @@ from .models import Category, Brand, Product
 def contacto(request):
     return render(request, 'store/contacto.html')
 
+def ofertas(request):
+    return render(request, 'store/ofertas.html')
+
 def catalog_view(request):
     """
     Vista principal del catálogo.
