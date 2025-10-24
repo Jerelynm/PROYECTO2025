@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'store',
 ]
 
+# Archivos estáticos (CSS, JS, imágenes)
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [ BASE_DIR / 'static' ]  # carpeta global "static" en la raíz del proyecto
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
