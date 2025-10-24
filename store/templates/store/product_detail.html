@@ -1,0 +1,17 @@
+{% extends 'store/base.html' %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+
+<div style="text-align:center;">
+    <h2>{{ product.name }}</h2>
+    <p><strong>Marca:</strong> {{ product.brand.name }}</p>
+    <p><strong>Categoría:</strong> {{ product.category.name }}</p>
+    <p><strong>Precio:</strong> Q{{ product.price }}</p>
+    <p><strong>Stock disponible:</strong> {{ product.stock }}</p>
+    <p><strong>Estado:</strong> {% if product.is_active %}Disponible{% else %}Agotado{% endif %}</p>
+    <p><strong>Fecha de registro:</strong> {{ product.created_at|date:"d/m/Y H:i" }}</p>
+
+    <a href="/store/" style="display:inline-block; margin-top:15px; padding:10px 20px; background:#0078D7; color:white; border-radius:5px; text-decoration:none;">← Volver al catálogo</a>
+</div>
+
+{% endblock %}

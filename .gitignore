@@ -1,0 +1,29 @@
+@'
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Django
+db.sqlite3
+/media/
+staticfiles/
+
+# Entornos
+.venv/
+.venv312/
+env/
+venv/
+
+# IDE
+.idea/
+.vscode/
+
+# SO
+.DS_Store
+Thumbs.db
+'@ | Out-File -Encoding utf8 .gitignore

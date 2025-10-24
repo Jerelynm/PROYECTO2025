@@ -1,0 +1,59 @@
+/* Tema consistente con Ofertas (usa variables de color por modo claro/oscuro) */
+:root{
+  --bg:#f7f8fa; --text:#111827; --panel:#ffffff; --line:#e5e7eb;
+  --primary:#2563eb; --accent:#f97316; --ok:#10b981; --error:#ef4444;
+}
+body.dark-mode{
+  --bg:#0b1220; --text:#e5e7eb; --panel:#111827; --line:#1f2937;
+}
+
+body { background:var(--bg); color:var(--text); }
+
+.contact-hero{
+  padding:3.5rem 0; text-align:center; color:#fff;
+  background: linear-gradient(rgba(17,24,39,.75),rgba(17,24,39,.75)),
+    url('https://images.unsplash.com/photo-1525182008055-f88b95ff7980?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+}
+.contact-hero .title{ font-size:2.2rem; margin:0 0 .35rem }
+.contact-hero .sub{ opacity:.95; margin:0 }
+
+.contact-grid{
+  display:grid; gap:1.25rem; margin:2rem auto;
+  grid-template-columns: minmax(0,1fr); /* móvil */
+}
+@media (min-width: 900px){
+  .contact-grid{ grid-template-columns: 2fr 1fr; }
+}
+
+.contact-card, .contact-info{
+  background:var(--panel); border:1px solid var(--line); border-radius:12px;
+  padding:1.25rem;
+}
+
+.contact-card h2{ margin-top:0 }
+.row{ display:flex; flex-direction:column; gap:.4rem; margin-bottom:1rem }
+input, textarea{
+  border:1px solid var(--line); background:#fff; color:#111827;
+  padding:.65rem .8rem; border-radius:8px; outline:0;
+}
+body.dark-mode input, body.dark-mode textarea{
+  background:#0f172a; color:var(--text); border-color:#1f2937;
+}
+.help{ font-size:.85rem; opacity:.7; text-align:right }
+
+.btn-primary{
+  background:var(--primary); color:#fff; border:0; padding:.7rem 1rem; border-radius:8px; cursor:pointer;
+}
+.btn-primary:hover{ filter:brightness(.95) }
+
+.flash{ margin:0 0 1rem }
+.flash-item{ padding:.6rem .8rem; border-radius:8px; margin-bottom:.5rem }
+.flash-item.success{ background:rgba(16,185,129,.12); color:#10b981; border:1px solid rgba(16,185,129,.35) }
+.flash-item.error{ background:rgba(239,68,68,.12); color:#ef4444; border:1px solid rgba(239,68,68,.35) }
+
+.contact-info ul{ list-style:none; padding:0; margin:0 }
+.contact-info li{ padding:.4rem 0; border-bottom:1px dashed var(--line) }
+.contact-info li:last-child{ border-bottom:0 }
+.social{ display:flex; gap:.75rem; flex-wrap:wrap }
+.social a{ color:var(--primary); text-decoration:none; }
+.social a:hover{ text-decoration:underline }

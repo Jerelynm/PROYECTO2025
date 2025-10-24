@@ -1,0 +1,75 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Contacto | Tienda Tech{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/contacto.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="contact-hero">
+  <div class="container">
+    <h1 class="title">Contacto</h1>
+    <p class="sub">¿Tienes dudas, sugerencias o cotizaciones? Escríbenos.</p>
+  </div>
+</div>
+
+<div class="container contact-grid">
+  <section class="contact-card">
+    <h2>Envíanos un mensaje</h2>
+
+    {# mensajes flash (éxito/error) #}
+    {% if messages %}
+      <div class="flash">
+        {% for m in messages %}
+          <div class="flash-item {{ m.tags }}">{{ m }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form method="post" id="contactForm" novalidate>
+      {% csrf_token %}
+      <div class="row">
+        <label for="name">Nombre</label>
+        <input id="name" name="name" type="text" maxlength="80" required>
+      </div>
+      <div class="row">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required>
+      </div>
+      <div class="row">
+        <label for="subject">Asunto</label>
+        <input id="subject" name="subject" type="text" maxlength="120" required>
+      </div>
+      <div class="row">
+        <label for="message">Mensaje</label>
+        <textarea id="message" name="message" rows="5" maxlength="2000" required></textarea>
+        <div class="help"><span id="count">0</span>/2000</div>
+      </div>
+
+      <button type="submit" class="btn-primary">Enviar</button>
+    </form>
+  </section>
+
+  <aside class="contact-info">
+    <h3>Soporte</h3>
+    <ul>
+      <li><strong>Email:</strong> soporte@tiendatech.com</li>
+      <li><strong>Tel:</strong> +502 5555 5555</li>
+      <li><strong>Horario:</strong> Lun–Vie 9:00–18:00</li>
+    </ul>
+
+    <h3 style="margin-top:1.5rem">Síguenos</h3>
+    <div class="social">
+      <a href="#" aria-label="Facebook">Facebook</a>
+      <a href="#" aria-label="Instagram">Instagram</a>
+      <a href="#" aria-label="X">X</a>
+    </div>
+  </aside>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/contacto.js' %}"></script>
+{% endblock %}

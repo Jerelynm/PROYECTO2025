@@ -1,0 +1,12 @@
+{% extends 'store/base.html' %}
+{% block title %}Marcas{% endblock %}
+{% block content %}
+<h2 style="text-align:center;">Marcas disponibles</h2>
+<ul style="list-style:none; text-align:center;">
+    {% for b in brands %}
+    <li><a href="/store/brand/{{ b.slug }}/">{{ b.name }}</a></li>
+    {% empty %}
+    <li>No hay marcas disponibles.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

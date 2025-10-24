@@ -1,0 +1,114 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Ofertas | Tienda Tech{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/ofertas.css' %}">
+{% endblock %}
+
+{% block content %}
+  <section class="ofertas-hero">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <h1 class="ofertas-title" style="margin:0;">Ofertas Especiales</h1>
+        <button class="theme-toggle" id="themeBtn" title="Modo oscuro">
+          <i id="themeIcon" class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+      <p class="ofertas-sub">Descubre nuestros productos con descuentos exclusivos. ¡Aprovecha estas ofertas por tiempo limitado!</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="ofertas-toolbar">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="cpu">CPU</button>
+      <button class="filter-btn" data-filter="teclado">Teclados</button>
+      <button class="filter-btn" data-filter="monitor">Monitores</button>
+      <button class="filter-btn" data-filter="accesorio">Accesorios</button>
+    </div>
+
+    <div class="products-grid">
+      <article class="card-offer" data-category="cpu">
+        <span class="badge-discount">-25%</span>
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=600&q=60" alt="Procesador Intel">
+        </div>
+        <div class="card-body">
+          <div class="cat">CPU</div>
+          <h3 class="title">MotherBoard + Intel Core i7</h3>
+          <p class="desc">Procesador 8C/16T de última generación.</p>
+          <div class="price"><span class="old">Q3,500.00</span> <span class="new">Q2,625.00</span></div>
+          <button class="btn-cart">Añadir al carrito</button>
+        </div>
+      </article>
+
+      <article class="card-offer" data-category="teclado">
+        <span class="badge-discount">-30%</span>
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1541140532154-b024d705b90a?auto=format&fit=crop&w=600&q=60" alt="Teclado Mecánico">
+        </div>
+        <div class="card-body">
+          <div class="cat">Teclado</div>
+          <h3 class="title">Teclado Mecánico RGB</h3>
+          <p class="desc">Switches mecánicos con retroiluminación.</p>
+          <div class="price"><span class="old">Q950.00</span> <span class="new">Q665.00</span></div>
+          <button class="btn-cart">Añadir al carrito</button>
+        </div>
+      </article>
+
+      <article class="card-offer" data-category="monitor">
+        <span class="badge-discount">-15%</span>
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=60" alt="Monitor 27">
+        </div>
+        <div class="card-body">
+          <div class="cat">Monitor</div>
+          <h3 class="title">Monitor Gaming 27"</h3>
+          <p class="desc">QHD 144Hz con FreeSync.</p>
+          <div class="price"><span class="old">Q2,800.00</span> <span class="new">Q2,380.00</span></div>
+          <button class="btn-cart">Añadir al carrito</button>
+        </div>
+      </article>
+
+      <article class="card-offer" data-category="accesorio">
+        <span class="badge-discount">-40%</span>
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=600&q=60" alt="Auriculares Gaming">
+        </div>
+        <div class="card-body">
+          <div class="cat">Accesorio</div>
+          <h3 class="title">Auriculares Gaming 7.1</h3>
+          <p class="desc">Sonido envolvente con micrófono.</p>
+          <div class="price"><span class="old">Q650.00</span> <span class="new">Q390.00</span></div>
+          <button class="btn-cart">Añadir al carrito</button>
+        </div>
+      </article>
+    </div>
+
+    <section class="countdown-wrap">
+      <h3>¡Ofertas por tiempo limitado!</h3>
+      <div class="countdown">
+        <div class="cd-item"><div id="cd-days" class="cd-num">05</div><div>Días</div></div>
+        <div class="cd-item"><div id="cd-hours" class="cd-num">12</div><div>Horas</div></div>
+        <div class="cd-item"><div id="cd-min" class="cd-num">45</div><div>Minutos</div></div>
+        <div class="cd-item"><div id="cd-sec" class="cd-num">30</div><div>Segundos</div></div>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <h3>¡No te pierdas nuestras ofertas!</h3>
+      <p>Suscríbete y recibe descuentos exclusivos en tu correo.</p>
+      <form>
+        <input type="email" placeholder="Tu correo electrónico" required>
+        <button type="submit">Suscribirme</button>
+      </form>
+    </section>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/ofertas.js' %}"></script>
+{% endblock %}
