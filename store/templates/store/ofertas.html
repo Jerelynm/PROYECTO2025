@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas - Tienda de Tecnología</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --discount-color: #27ae60;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --primary-color: #34495e;
+            --secondary-color: #2980b9;
+            --accent-color: #c0392b;
+            --discount-color: #2ecc71;
+            --text-color: #ecf0f1;
+            --bg-color: #2c3e50;
+            --card-bg: #34495e;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        nav ul li a.active {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .offers-section {
+            padding: 2rem 0;
+        }
+
+        .offer-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: var(--card-bg);
+            border: 1px solid #ddd;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-color);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--discount-color);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .product-image {
+            height: 200px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .sale-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .add-to-cart {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.7rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background-color: #2980b9;
+        }
+
+        .countdown-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 0;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .countdown-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .countdown-item {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .newsletter {
+            background-color: var(--card-bg);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .newsletter h2 {
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .newsletter-button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .newsletter-button:hover {
+            background-color: #c0392b;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .countdown {
+                flex-wrap: wrap;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input {
+                border-radius: 4px;
+                margin-bottom: 0.5rem;
+            }
+
+            .newsletter-button {
+                border-radius: 4px;
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Tienda<span>Tech</span></div>
+            <nav>
+                <ul>
+                    <li><a href="/store/">Regresar a Home</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Ofertas Especiales</h1>
+            <p>Descubre nuestros productos con descuentos exclusivos. ¡Aprovecha estas ofertas por tiempo limitado!</p>
+        </div>
+    </section>
+
+    <section class="offers-section">
+        <div class="container">
+            <h2 class="section-title">Productos en Oferta</h2>
+
+            <div class="offer-filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="cpu">CPU</button>
+                <button class="filter-btn" data-filter="teclado">Teclados</button>
+                <button class="filter-btn" data-filter="monitor">Monitores</button>
+                <button class="filter-btn" data-filter="accesorio">Accesorios</button>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card" data-category="cpu">
+                    <div class="discount-badge">-25%</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Procesador Intel">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">CPU</div>
+                        <h3 class="product-title">MotherBoard + Procesador Intel Core i7</h3>
+                        <p class="product-description">Procesador de última generación con 8 núcleos y 16 hilos.</p>
+                        <div class="product-price">
+                            <span class="original-price">Q3,500.00</span>
+                            <span class="sale-price">Q2,625.00</span>
+                        </div>
+                        <button class="add-to-cart">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="teclado">
+                    <div class="discount-badge">-30%</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1541140532154-b024d705b90a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Teclado Mecánico">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Teclado</div>
+                        <h3 class="product-title">Teclado Mecánico RGB</h3>
+                        <p class="product-description">Teclado gaming con switches mecánicos y retroiluminación RGB.</p>
+                        <div class="product-price">
+                            <span class="original-price">Q950.00</span>
+                            <span class="sale-price">Q665.00</span>
+                        </div>
+                        <button class="add-to-cart">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="monitor">
+                    <div class="discount-badge">-15%</div>
+                    <div class="product-image">
+                        <img src="data:image/jpeg;base64,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" alt="Monitor Gaming">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Monitor</div>
+                        <h3 class="product-title">Monitor Gaming 27"</h3>
+                        <p class="product-description">Monitor QHD 144Hz con tecnología FreeSync para gaming.</p>
+                        <div class="product-price">
+                            <span class="original-price">Q2,800.00</span>
+                            <span class="sale-price">Q2,380.00</span>
+                        </div>
+                        <button class="add-to-cart">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="accesorio">
+                    <div class="discount-badge">-40%</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Auriculares Gaming">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Accesorio</div>
+                        <h3 class="product-title">Auriculares Gaming 7.1</h3>
+                        <p class="product-description">Auriculares con sonido surround 7.1 y micrófono retráctil.</p>
+                        <div class="product-price">
+                            <span class="original-price">Q650.00</span>
+                            <span class="sale-price">Q390.00</span>
+                        </div>
+                        <button class="add-to-cart">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="cpu">
+                    <div class="discount-badge">-20%</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Procesador AMD">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">CPU</div>
+                        <h3 class="product-title">Procesador AMD Ryzen 5</h3>
+                        <p class="product-description">6 núcleos y 12 hilos, perfecto para gaming y productividad.</p>
+                        <div class="product-price">
+                            <span class="original-price">Q1,750.00</span>
+                            <span class="sale-price">Q1,400.00</span>
+                        </div>
+                        <button class="add-to-cart">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="teclado">
+                    <div class="discount-badge">-35%</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Teclado Inalámbrico">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Teclado</div>
+                        <h3 class="product-title">Teclado Inalámbrico Slim</h3>
+                        <p class="product-description">Teclado ultra delgado con conexión Bluetooth y batería de larga duración.</p>
+                        <div class="product-price">
+                            <span class="original-price">Q720.00</span>
+                            <span class="sale-price">Q468.00</span>
+                        </div>
+                        <button class="add-to-cart">Añadir al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="countdown-section">
+        <div class="container">
+            <h2 class="countdown-title">¡Ofertas por Tiempo Limitado!</h2>
+            <p>Estas ofertas especiales terminan en:</p>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">05</div>
+                    <div class="countdown-label">Días</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">12</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">45</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">30</div>
+                    <div class="countdown-label">Segundos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="newsletter">
+            <h2>¡No Te Pierdas Nuestras Ofertas!</h2>
+            <p>Suscríbete a nuestro boletín y recibe las mejores ofertas directamente en tu correo electrónico.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Tu correo electrónico" required>
+                <button type="submit" class="newsletter-button">Suscribirse</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Tienda Tech | Desarrollado con Django</p>
+                <div class="social-links">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle de modo claro/oscuro
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        // Verificar si hay una preferencia guardada
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        // Filtrado de productos
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remover clase active de todos los botones
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Añadir clase active al botón clickeado
+                button.classList.add('active');
+
+                const filter = button.getAttribute('data-filter');
+
+                productCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Cuenta regresiva
+        function updateCountdown() {
+            const daysElement = document.getElementById('days');
+            const hoursElement = document.getElementById('hours');
+            const minutesElement = document.getElementById('minutes');
+            const secondsElement = document.getElementById('seconds');
+
+            // Fecha objetivo (5 días desde ahora)
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 5);
+
+            function update() {
+                const now = new Date();
+                const difference = targetDate - now;
+
+                if (difference <= 0) {
+                    // La oferta ha terminado
+                    daysElement.textContent = '00';
+                    hoursElement.textContent = '00';
+                    minutesElement.textContent = '00';
+                    secondsElement.textContent = '00';
+                    return;
+                }
+
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                daysElement.textContent = days.toString().padStart(2, '0');
+                hoursElement.textContent = hours.toString().padStart(2, '0');
+                minutesElement.textContent = minutes.toString().padStart(2, '0');
+                secondsElement.textContent = seconds.toString().padStart(2, '0');
+            }
+
+            update();
+            setInterval(update, 1000);
+        }
+
+        // Inicializar cuenta regresiva
+        updateCountdown();
+
+        // Manejo del formulario de newsletter
+        const newsletterForm = document.querySelector('.newsletter-form');
+
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = newsletterForm.querySelector('.newsletter-input');
+            alert(`¡Gracias por suscribirte con ${emailInput.value}! Te enviaremos nuestras mejores ofertas.`);
+            emailInput.value = '';
+        });
+
+        // Manejo de botones "Añadir al Carrito"
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const productCard = button.closest('.product-card');
+                const productTitle = productCard.querySelector('.product-title').textContent;
+
+                // Animación de añadir al carrito
+                button.textContent = '¡Añadido!';
+                button.style.backgroundColor = '#27ae60';
+
+                setTimeout(() => {
+                    button.textContent = 'Añadir al Carrito';
+                    button.style.backgroundColor = '';
+                }, 2000);
+
+                // En una aplicación real, aquí se añadiría el producto al carrito
+                console.log(`Producto añadido: ${productTitle}`);
+            });
+        });
+    </script>
+</body>
+</html>
