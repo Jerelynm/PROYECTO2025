@@ -2,10 +2,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>{% block title %}Tienda Tecnológica{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Tienda Tech{% endblock %}</title>
+
+    <!-- CSS base -->
+  <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+
+
+  <!-- JS global -->
   <script defer src="{% static 'js/main.js' %}"></script>
+
+    <!-- llamado de css -->
+{% block extra_css %}{% endblock %}
+
+
 </head>
 <body>
 
@@ -24,13 +35,18 @@
   <a href="{% url 'contacto' %}">Contacto</a>
 </nav>
 
-<main>
-  {% block content %}{% endblock %}
-</main>
+ <main class="container my-4">
+    {% block content %}{% endblock %}
+  </main>
+
 
 <footer>
   <p>© 2025 Tienda Tech | Desarrollado con Django</p>
 </footer>
+
+        <!-- antes de cerrar </body> -->
+{% block extra_js %}{% endblock %}
+
 
 </body>
 </html>
