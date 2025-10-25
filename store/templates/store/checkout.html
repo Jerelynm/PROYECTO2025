@@ -1,0 +1,15 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2>✅ Pedido realizado</h2>
+  <p>Resumen del pedido:</p>
+  <ul>
+    {% for it in items %}
+      <li>{{ it.name }} × {{ it.quantity }} — Q{{ it.subtotal }}</li>
+    {% endfor %}
+  </ul>
+  <p><strong>Total: Q{{ total }}</strong></p>
+
+  <a href="{% url 'catalog' %}" class="btn btn-primary">Volver al catálogo</a>
+</div>
+{% endblock %}

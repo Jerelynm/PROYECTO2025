@@ -1,0 +1,37 @@
+{# store/_products_table.html #}
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Categoría</th>
+      <th>Precio</th>
+      <th>Oferta</th>
+      <th>Precio final</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in products %}
+      <tr>
+        <td>{{ p.name }}</td>
+        <td>
+          {# soporta FK (p.category.name) o CharField (p.category) #}
+          {{ p.category.name|default:p.category }}
+        </td>
+        <td>Q{{ p.price }}</td>
+        <td>
+          {# si no existe discount_price, mostramos — #}
+          {% if p.discount_price %}Q{{ p.discount_price }}{% else %}—{% endif %}
+        </td>
+        <td>
+          {% if p.discount_price and p.discount_price < p.price %}
+            Q{{ p.discount_price }}
+          {% else %}
+            Q{{ p.price }}
+          {% endif %}
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="5">No hay productos.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>

@@ -1,0 +1,52 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>🛒 Carrito de Compras</h2>
+
+  {% if cart_items %}
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart_items %}
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>Q{{ item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>Q{{ item.subtotal }}</td>
+            <td>
+              <form class="frm-remove" method="post" data-id="{{ item.id }}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm btn-remove">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h4>Total: Q{{ total }}</h4>
+
+    <form method="post" action="{% url 'checkout' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">Finalizar pedido</button>
+    </form>
+
+  {% else %}
+    <p>Tu carrito está vacío 😢</p>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'store/js/cart_page.js' %}"></script>
+{% endblock %}
