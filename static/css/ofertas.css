@@ -1,0 +1,73 @@
+/* ===== Ofertas: tema y layout ===== */
+:root{
+  --primary:#2c3e50; --secondary:#3498db; --accent:#e74c3c;
+  --discount:#27ae60; --text:#333; --bg:#f7f8fa; --card:#fff;
+}
+body.dark-mode{
+  --primary:#111827; --secondary:#2563eb; --accent:#f87171;
+  --discount:#10b981; --text:#e5e7eb; --bg:#0b1220; --card:#1f2937;
+}
+
+.ofertas-hero{
+  color:#fff; text-align:center; padding:4rem 0; margin-bottom:2rem;
+  background: linear-gradient(rgba(17,24,39,.75),rgba(17,24,39,.75)),
+    url('https://images.unsplash.com/photo-1607082350899-7e105aa886ae?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+}
+.ofertas-title{font-size:2.2rem; margin:0 0 .5rem}
+.ofertas-sub{opacity:.95; max-width:780px; margin:0 auto}
+
+.ofertas-toolbar{display:flex; align-items:center; gap:12px; justify-content:center; flex-wrap:wrap; margin: 0 auto 1.25rem}
+.filter-btn{
+  background:var(--card); border:1px solid #ddd; padding:.45rem .9rem;
+  border-radius:6px; cursor:pointer; color:var(--text);
+}
+.filter-btn:hover,.filter-btn.active{background:var(--secondary); color:#fff}
+
+.products-grid{
+  display:grid; gap:1.25rem;
+  grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
+}
+.card-offer{
+  background:var(--card); border-radius:10px; overflow:hidden;
+  box-shadow:0 6px 16px rgba(0,0,0,.08); position:relative; transition:transform .2s ease;
+}
+.card-offer:hover{ transform: translateY(-4px); }
+.badge-discount{
+  position:absolute; top:10px; right:10px; background:var(--discount);
+  color:#fff; font-weight:700; padding:.25rem .5rem; border-radius:6px;
+}
+.card-img{ height:180px; display:flex; align-items:center; justify-content:center; background:#f2f3f5; overflow:hidden }
+.card-img img{ max-width:100%; max-height:100%; object-fit:cover }
+.card-body{ padding:1rem }
+.cat{ color:var(--secondary); font-size:.9rem; margin-bottom:.35rem }
+.title{ font-size:1.05rem; font-weight:700; color:var(--text); margin:0 0 .35rem }
+.desc{ font-size:.9rem; opacity:.9; margin:.25rem 0 .75rem }
+.price{ display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem }
+.old{ text-decoration:line-through; color:#999 }
+.new{ color:var(--accent); font-weight:700 }
+.btn-cart{ width:100%; border:none; border-radius:8px; padding:.6rem; background:var(--secondary); color:#fff; cursor:pointer }
+.btn-cart:hover{ filter:brightness(.95) }
+
+.countdown-wrap{ background:var(--primary); color:#fff; text-align:center; padding:2.2rem 1rem; border-radius:10px; margin:2rem 0 }
+.countdown{ display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:.75rem }
+.cd-item{ background:rgba(255,255,255,.15); min-width:84px; padding:.6rem .8rem; border-radius:8px }
+.cd-num{ font-size:1.6rem; font-weight:800 }
+
+.newsletter{ background:var(--card); padding:1.8rem; border-radius:10px; margin:2rem 0; text-align:center; box-shadow:0 6px 16px rgba(0,0,0,.06) }
+.newsletter form{ display:flex; gap:.5rem; max-width:520px; margin:0 auto }
+.newsletter input{ flex:1; padding:.6rem .8rem; border:1px solid #ddd; border-radius:8px }
+.newsletter button{ padding:.6rem 1rem; border:none; border-radius:8px; background:var(--accent); color:#fff; font-weight:700 }
+.newsletter button:hover{ filter:brightness(.95) }
+
+/* ===== Overrides dark-mode del layout global (solo Ofertas) ===== */
+body { background-color: var(--bg); color: var(--text); }
+body.dark-mode header,
+body.dark-mode nav,
+body.dark-mode footer { background:#0b1220 !important; color:#e5e7eb !important; border-color:transparent !important; }
+body.dark-mode nav a { color:#e5e7eb !important; }
+body.dark-mode nav a:hover { color:#93c5fd !important; }
+body.dark-mode main { background: transparent !important; }
+
+/* Botón del tema */
+.theme-toggle { border:none; background:transparent; font-size:1.1rem; cursor:pointer; color:#fff; }
+body.dark-mode .theme-toggle { color:#e5e7eb; }
