@@ -58,3 +58,5 @@ def product_detail(request, slug):
     return render(request, 'store/product_detail.html', {'product': product})
 
 
+def marketing(request):
+    return render(request, 'store/marketing.html')

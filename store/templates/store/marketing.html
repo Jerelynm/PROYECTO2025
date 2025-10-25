@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing de Ofertas</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        /* Reset y fuentes */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Sección principal */
+        #ofertas {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        #ofertas h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #4f46e5;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .card-content p {
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .price-buy {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #e11d48;
+            font-size: 1.2rem;
+        }
+
+        .buy-btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: #9333ea;
+            transform: translateY(-3px);
+        }
+
+        /* Oferta flash */
+        .flash {
+            position: absolute;
+            top: 10px;
+            left: -50px;
+            background: #e11d48;
+            color: white;
+            font-weight: bold;
+            padding: 10px 50px;
+            transform: rotate(-45deg);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Botón regresar */
+        .back-btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 20px;
+            background: #f59e0b;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #d97706;
+            transform: translateY(-3px);
+        }
+
+        /* Animaciones de frases */
+        #promo {
+            font-size: 1.5rem;
+            color: #f43f5e;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            animation: blink 1.2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% {opacity: 1;}
+            25%, 75% {opacity: 0;}
+        }
+    </style>
+</head>
+<body>
+
+<section id="ofertas">
+    <div id="promo">🔥 Oferta del día: ¡Hasta 50% de descuento! 🔥</div>
+    <h2>Productos en Oferta</h2>
+
+    <div class="offers-grid">
+        <!-- Card Producto 1 -->
+        <div class="card">
+            <div class="flash">Hot!</div>
+            <img src="https://xyzpcgear.com/wp-content/uploads/2024/09/22.png" alt="CPU Gamer XYZ">
+            <div class="card-content">
+                <h3>CPU Gamer XYZ</h3>
+                <p>Alto rendimiento para gaming y streaming.</p>
+                <div class="price-buy">
+                    <span class="price">Q2,500</span>
+                    <button class="buy-btn" onclick="comprar('CPU Gamer XYZ')">Comprar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Producto 2 -->
+        <div class="card">
+            <div class="flash">Oferta!</div>
+            <img src="https://m.media-amazon.com/images/I/71Iw-BicYqL._AC_SL1500_.jpg" alt="Monitor QHD 27”">
+            <div class="card-content">
+                <h3>Monitor QHD 27”</h3>
+                <p>Colores vivos y alta tasa de refresco.</p>
+                <div class="price-buy">
+                    <span class="price">Q1,800</span>
+                    <button class="buy-btn" onclick="comprar('Monitor QHD 27”')">Comprar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Producto 3 -->
+        <div class="card">
+            <div class="flash">Descuento!</div>
+            <img src="https://m.media-amazon.com/images/I/71KBeJ1nz6L._AC_SL1500_.jpg" alt="Teclado Mecánico RGB">
+            <div class="card-content">
+                <h3>Teclado Mecánico RGB</h3>
+                <p>Diseño ergonómico y luces personalizables.</p>
+                <div class="price-buy">
+                    <span class="price">Q650</span>
+                    <button class="buy-btn" onclick="comprar('Teclado Mecánico RGB')">Comprar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Producto 4 -->
+        <div class="card">
+            <div class="flash">Flash Sale!</div>
+            <img src="https://m.media-amazon.com/images/I/71FkbQzfOYL._AC_SL1500_.jpg" alt="Auriculares 7.1 Surround">
+            <div class="card-content">
+                <h3>Auriculares 7.1 Surround</h3>
+                <p>Sonido envolvente para gamers exigentes.</p>
+                <div class="price-buy">
+                    <span class="price">Q900</span>
+                    <button class="buy-btn" onclick="comprar('Auriculares 7.1 Surround')">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="javascript:history.back()" class="back-btn">← Regresar</a>
+</section>
+
+<script>
+    // Función simulada de compra con alerta
+    function comprar(producto) {
+        alert(`¡Has agregado "${producto}" al carrito!`);
+    }
+
+    // Cambiar mensajes promocionales automáticamente
+    const promos = [
+        "🔥 Oferta del día: ¡Hasta 50% de descuento! 🔥",
+        "🎁 Cupón exclusivo: USA CODE 'AHORRA10' 🎁",
+        "⏰ ¡Solo hoy! Productos limitados ⏰",
+        "🏷️ Compra 2 y obtén 1 gratis 🏷️"
+    ];
+
+    let promoIndex = 0;
+    const promoDiv = document.getElementById('promo');
+    setInterval(() => {
+        promoIndex = (promoIndex + 1) % promos.length;
+        promoDiv.textContent = promos[promoIndex];
+    }, 4000);
+</script>
+
+</body>
+</html>

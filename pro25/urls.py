@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('store/', include('store.urls')),  # << conecta las URLs de la tienda
+    path('store/', include('store.urls')),
+    path('', RedirectView.as_view(url='/store/')),  # Redirige la raíz a /store/
 ]
